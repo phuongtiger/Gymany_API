@@ -43,7 +43,16 @@ namespace Gymany_API.Controllers
             this._db.SaveChanges();
             return CreatedAtRoute("GetGymOwnerByID", new{id = obj.AdminID, obj});
          }
-
+         [HttpPost("checklogin")]
+         public IActionResult CheckLogin(string username, string password)
+         {
+         var obj = this._db.GymOwners.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username) && c.Password.Equals(password));
+            if (obj == null)
+            {
+               return NotFound();
+            }
+            return Ok(obj);
+         }
         [HttpPut("Id")]
          public IActionResult Edit(int id, GymOwner obj)
          {

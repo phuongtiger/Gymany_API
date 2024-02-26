@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gymany_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240224070958_MyInitV1.1")]
+    [Migration("20240226070223_MyInitV1.1")]
     partial class MyInitV11
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
