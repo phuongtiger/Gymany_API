@@ -68,5 +68,15 @@ namespace Gymany_API.Controllers
             this._db.SaveChanges();
             return CreatedAtRoute("GetPTByID", new{id = obj.PTID, obj});
          }
+         [HttpPost("checklogin")]
+         public IActionResult CheckLogin(string email, string password)
+         {
+            var obj = this._db.PersonalTrainers.AsNoTracking().FirstOrDefault(c => c.Email.Equals(email) && c.Password.Equals(password));
+            if (obj == null)
+            {
+               return NotFound();
+            }
+            return Ok(obj);
+         }
     }
 }
