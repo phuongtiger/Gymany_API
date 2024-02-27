@@ -16,6 +16,7 @@ namespace Gymany_API.Controllers
         public PTController(ApplicationDbContext db){
             this._db = db;
         } 
+        
         [HttpGet]
         public IActionResult GetPT()
         {
@@ -78,5 +79,6 @@ namespace Gymany_API.Controllers
             }
             return Ok(obj);
          }
+         
     }
 }

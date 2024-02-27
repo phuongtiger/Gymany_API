@@ -16,6 +16,21 @@ namespace Gymany_API.Controllers
         public PostController(ApplicationDbContext db){
             this._db = db;
         } 
+        [HttpGet("ptid", Name = "GetPostByPTID")]
+         public IActionResult GetPostByPTID(int ptid)
+         {
+            // Tìm tất cả các bài viết với ptid là khóa chính
+            var posts = this._db.Posts.Where(p => p.PTID == ptid).ToList();
+
+            // Kiểm tra xem có bài viết nào không
+            if (posts == null || posts.Count == 0)
+            {
+               return NotFound();
+            }
+
+            // Trả về danh sách bài viết
+            return Ok(posts);
+         }
         [HttpGet]
         public IActionResult GetPost()
         {
