@@ -68,5 +68,15 @@ namespace Gymany_API.Controllers
             this._db.SaveChanges();
             return CreatedAtRoute("GetCustomerByID", new{id = obj.CustomerID, obj});
          }
+         [HttpPost("checklogin")]
+         public IActionResult CheckLogin(string username, string password)
+         {
+            var obj = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username) && c.Password.Equals(password));
+            if (obj == null)
+            {
+               return NotFound();
+            }
+            return Ok(obj);
+         }
     }
 }
