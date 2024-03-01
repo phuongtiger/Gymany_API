@@ -5,7 +5,6 @@ D:\Gymany_API\bin\Debug\net5.0\Gymany_API.deps.json
 D:\Gymany_API\bin\Debug\net5.0\Gymany_API.runtimeconfig.json
 D:\Gymany_API\bin\Debug\net5.0\Gymany_API.runtimeconfig.dev.json
 D:\Gymany_API\bin\Debug\net5.0\Gymany_API.dll
-D:\Gymany_API\bin\Debug\net5.0\ref\Gymany_API.dll
 D:\Gymany_API\bin\Debug\net5.0\Gymany_API.pdb
 D:\Gymany_API\bin\Debug\net5.0\Humanizer.dll
 D:\Gymany_API\bin\Debug\net5.0\Microsoft.AspNetCore.Razor.Language.dll
@@ -125,11 +124,12 @@ D:\Gymany_API\obj\Debug\net5.0\Gymany_API.csproj.CoreCompileInputs.cache
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.MvcApplicationPartsAssemblyInfo.cs
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.MvcApplicationPartsAssemblyInfo.cache
 D:\Gymany_API\obj\Debug\net5.0\staticwebassets\Gymany_API.StaticWebAssets.Manifest.cache
-D:\Gymany_API\obj\Debug\net5.0\staticwebassets\Gymany_API.StaticWebAssets.xml
 D:\Gymany_API\obj\Debug\net5.0\scopedcss\bundle\Gymany_API.styles.css
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.RazorTargetAssemblyInfo.cache
-D:\Gymany_API\obj\Debug\net5.0\Gymany_API.csproj.CopyComplete
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.dll
 D:\Gymany_API\obj\Debug\net5.0\ref\Gymany_API.dll
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.pdb
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.genruntimeconfig.cache
+D:\Gymany_API\bin\Debug\net5.0\ref\Gymany_API.dll
+D:\Gymany_API\obj\Debug\net5.0\staticwebassets\Gymany_API.StaticWebAssets.xml
+D:\Gymany_API\obj\Debug\net5.0\Gymany_API.csproj.CopyComplete

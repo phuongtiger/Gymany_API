@@ -22,10 +22,10 @@ namespace Gymany_API.Controllers
             IEnumerable<Notification> list = this._db.Notifications.ToList();
             return Ok(list);
         }
-        [HttpGet("id", Name = "GetNotificationByID")]
-        public IActionResult GetNotificationByID(int id)
+        [HttpGet("id", Name = "GetNotiByCustomerID")]
+        public IActionResult GetNotiByCustomerID(int id)
         {
-            var obj = this._db.Notifications.Find(id);
+            var obj = this._db.Notifications.Where(n => n.CustomerID == id);
             if (obj==null)
             {
                return NotFound(); 
