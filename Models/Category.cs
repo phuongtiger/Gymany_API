@@ -14,6 +14,8 @@ namespace Gymany_API.Models
         [Required]
         [StringLength(50)]
         public string Type { get; set; }
+        [StringLength(200)]
+        public string Image { get; set; }
 
         public string Description { get; set; }
     }

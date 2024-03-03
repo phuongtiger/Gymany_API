@@ -32,5 +32,11 @@ namespace Gymany_API.Models
         [Required]
         [StringLength(50)]
         public string Email { get; set; }
+
+        [StringLength(200)]
+        public string Image { get; set; }
+
+        [StringLength(20)]
+        public string Phone { get; set; }
     }
 }
