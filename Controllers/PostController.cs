@@ -83,5 +83,20 @@ namespace Gymany_API.Controllers
             this._db.SaveChanges();
             return CreatedAtRoute("GetPostByID", new{id = obj.PostID, obj});
          }
+         [HttpGet("PostID", Name = "GetBlogDetailByPostID")]
+         public IActionResult GetBlogDetailByPostID(int PostID)
+         {
+            // Tìm tất cả các bài viết với ptid là khóa chính
+            var posts = this._db.Posts.Where(p => p.PostID == PostID).ToList();
+
+            // Kiểm tra xem có bài viết nào không
+            if (posts == null || posts.Count == 0)
+            {
+               return Ok(posts);
+            }
+
+            // Trả về danh sách bài viết
+            return Ok(posts);
+         }
     }
 }
