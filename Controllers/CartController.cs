@@ -68,5 +68,22 @@ namespace Gymany_API.Controllers
             this._db.SaveChanges();
             return CreatedAtRoute("GetCartByID", new{id = obj.CartID, obj});
          }
+         [HttpGet("CustomerID", Name = "GetCartByCustomerID")]
+         public IActionResult GetCartByCustomerID(int CustomerID)
+         {
+            IEnumerable<Product> listP = this._db.Products.ToList();
+            IEnumerable<Customer> listCu = this._db.Customers.ToList();
+            // Tìm tất cả các bài viết với ptid là khóa chính
+            var carts = this._db.Carts.Where(cu => cu.CustomerID == CustomerID).ToList();
+
+            // Kiểm tra xem có bài viết nào không
+            if (carts == null || carts.Count == 0)
+            {
+               return Ok(carts);
+            }
+
+            // Trả về danh sách bài viết
+            return Ok(carts);
+         }
     }
 }
