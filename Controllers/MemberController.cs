@@ -32,6 +32,16 @@ namespace Gymany_API.Controllers
             }
             return Ok(obj);
         }
+        [HttpGet("customerID", Name = "GetMemberByCustomerID")]
+        public IActionResult GetMemberByCustomerID(int CustomerID)
+        {
+            var obj = this._db.Members.Where(p => p.CustomerID == CustomerID).ToList();
+            if (obj.Count == 0)
+            {
+               return NotFound(); 
+            }
+            return Ok(obj);
+        }
         [HttpPost]
          public IActionResult Create(Member obj)
          {

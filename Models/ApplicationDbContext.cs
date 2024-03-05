@@ -16,6 +16,7 @@ namespace Gymany_API.Models
         public DbSet<GymOwner> GymOwners { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PersonalTrainer> PersonalTrainers { get; set; }
         public DbSet<Post> Posts { get; set; }

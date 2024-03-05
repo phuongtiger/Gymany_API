@@ -47,6 +47,21 @@ namespace Gymany_API.Controllers
             // Trả về danh sách bài viết
             return Ok(workoutPlans);
          }
+         [HttpGet("MemberID", Name = "GetWorkoutByMemID")]
+         public IActionResult GetWorkoutByMemID(int memberid)
+         {
+            // Tìm tất cả các bài viết với ptid là khóa chính
+            var workoutPlans = this._db.WorkoutPlans.Where(p => p.MemberID == memberid).ToList();
+
+            // Kiểm tra xem có bài viết nào không
+            if (workoutPlans == null || workoutPlans.Count == 0)
+            {
+               return NotFound();
+            }
+
+            // Trả về danh sách bài viết
+            return Ok(workoutPlans);
+         }
         [HttpPost]
          public IActionResult Create(WorkoutPlan obj)
          {

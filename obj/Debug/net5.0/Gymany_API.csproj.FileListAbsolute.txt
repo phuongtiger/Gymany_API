@@ -130,6 +130,11 @@ D:\Gymany_API\obj\Debug\net5.0\Gymany_API.dll
 D:\Gymany_API\obj\Debug\net5.0\ref\Gymany_API.dll
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.pdb
 D:\Gymany_API\obj\Debug\net5.0\Gymany_API.genruntimeconfig.cache
-D:\Gymany_API\bin\Debug\net5.0\ref\Gymany_API.dll
-D:\Gymany_API\obj\Debug\net5.0\staticwebassets\Gymany_API.StaticWebAssets.xml
-D:\Gymany_API\obj\Debug\net5.0\Gymany_API.csproj.CopyComplete
+D:\Gymany_API\obj\Debug\net5.0\Gymany_API.sourcelink.json
+D:\Gymany_API\obj\Debug\net5.0\staticwebassets\Gymany_API.StaticWebAssets.Pack.cache
+D:\Gymany_API\obj\Debug\net5.0\staticwebassets\msbuild.Gymany_API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Gymany_API\obj\Debug\net5.0\staticwebassets\msbuild.build.Gymany_API.props
+D:\Gymany_API\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.Gymany_API.props
+D:\Gymany_API\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.Gymany_API.props
+D:\Gymany_API\obj\Debug\net5.0\Gymany_API.csproj.Up2Date
+D:\Gymany_API\obj\Debug\net5.0\refint\Gymany_API.dll
