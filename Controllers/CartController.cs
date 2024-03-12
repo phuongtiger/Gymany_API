@@ -85,5 +85,78 @@ namespace Gymany_API.Controllers
             // Trả về danh sách bài viết
             return Ok(carts);
          }
+         [HttpPost]
+      [Route("CreateCartByCustomerID")]
+      public async Task<IActionResult> CreateCartByCustomerID(int customerID, int productID)
+      {
+         try
+         {
+            // Check if the customer and product exist
+            var customer = await _db.Customers.FindAsync(customerID);
+            var product = await _db.Products.FindAsync(productID);
+
+            if (customer == null || product == null)
+            {
+               return NotFound(); // Return 404 Not Found if customer or product is not found
+            }
+
+            // Check if the product already exists in the customer's cart
+            var existingCart = await _db.Carts.FirstOrDefaultAsync(c => c.CustomerID == customerID && c.ProductID == productID);
+
+            if (existingCart != null)
+            {
+               // If the product exists, increase the quantity by 1
+               existingCart.Quantity++;
+            }
+            else
+            {
+               // If the product doesn't exist, create a new cart item
+               var newCart = new Cart
+               {
+                  CustomerID = customerID,
+                  ProductID = productID,
+                  Quantity = 1 // Initial quantity is 1
+               };
+               _db.Carts.Add(newCart);
+            }
+
+            await _db.SaveChangesAsync();
+
+            return Ok(); // Return 200 OK if the operation is successful
+         }
+         catch (Exception ex)
+         {
+            // Log the error for troubleshooting
+            Console.WriteLine($"Error: {ex.Message}");
+            return StatusCode(500, $"Internal server error: {ex.Message}"); // Return 500 Internal Server Error for unexpected errors
+         }
+      }
+
+
+
+
+
+       // POST: api/CartApi/UpdateCartItem
+        [HttpPost("UpdateCartItem")]
+        public async Task<IActionResult> UpdateCartItem(int cartId, int quantity)
+        {
+            var cartItem = await _db.Carts.FindAsync(cartId);
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            cartItem.Quantity = quantity;
+
+            try
+            {
+                await _db.SaveChangesAsync();
+                return Ok(); // Return success if update is successful
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest("Failed to update cart item.");
+            }
+        }
     }
 }
