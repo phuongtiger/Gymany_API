@@ -20,7 +20,7 @@ namespace Gymany_API.Controllers
          public IActionResult GetPostByPTID(int ptid)
          {
             // Tìm tất cả các bài viết với ptid là khóa chính
-            var posts = this._db.Posts.Where(p => p.PTID == ptid).ToList();
+            var posts = this._db.Posts.Where(p => p.PTID == ptid).OrderByDescending(n => n.PostID).ToList();
 
             // Kiểm tra xem có bài viết nào không
             if (posts == null || posts.Count == 0)
@@ -34,7 +34,7 @@ namespace Gymany_API.Controllers
         [HttpGet]
         public IActionResult GetPost()
         {
-            IEnumerable<Post> list = this._db.Posts.ToList();
+            IEnumerable<Post> list = this._db.Posts.OrderByDescending(n => n.PostID).ToList();
             return Ok(list);
         }
         [HttpGet("id", Name = "GetPostByID")]

@@ -21,7 +21,7 @@ namespace Gymany_API.Controllers
         [HttpGet]
         public IActionResult GetOrder()
         {
-            IEnumerable<Order> list = this._db.Orders.ToList();
+            IEnumerable<Order> list = this._db.Orders.OrderByDescending(n => n.OrderID).ToList();
             return Ok(list);
         }
         [HttpGet("id", Name = "GetOrderByID")]
@@ -118,7 +118,7 @@ namespace Gymany_API.Controllers
             try
             {
                 // Tìm các đơn hàng dựa trên CustomerID
-                var orders = _db.Orders.Where(o => o.CustomerID == customerID).ToList();
+                var orders = _db.Orders.Where(o => o.CustomerID == customerID).OrderByDescending(n => n.OrderID).ToList();
 
                 // Kiểm tra xem có đơn hàng nào không
                 if (orders == null || !orders.Any())

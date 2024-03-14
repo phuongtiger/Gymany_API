@@ -25,7 +25,7 @@ namespace Gymany_API.Controllers
         [HttpGet("id", Name = "GetNotiByCustomerID")]
         public IActionResult GetNotiByCustomerID(int id)
         {
-            var obj = this._db.Notifications.Where(n => n.CustomerID == id);
+            var obj = this._db.Notifications.Where(n => n.CustomerID == id).OrderByDescending(n => n.NotificationID).ToList();
             if (obj==null)
             {
                return NotFound(); 
