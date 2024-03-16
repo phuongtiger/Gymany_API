@@ -117,6 +117,8 @@ namespace Gymany_API.Controllers
         {
             try
             {
+                IEnumerable<Product> listP = this._db.Products.ToList();
+                IEnumerable<Customer> listCu = this._db.Customers.ToList();
                 // Tìm các đơn hàng dựa trên CustomerID
                 var orders = _db.Orders.Where(o => o.CustomerID == customerID).OrderByDescending(n => n.OrderID).ToList();
 
