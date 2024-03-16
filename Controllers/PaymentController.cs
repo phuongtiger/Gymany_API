@@ -68,5 +68,29 @@ namespace Gymany_API.Controllers
             this._db.SaveChanges();
             return CreatedAtRoute("GetPaymentByID", new{id = obj.PaymentID, obj});
          }
+         [HttpGet("GetCusIdPayment", Name = "GetPaymentByCustomerID")]
+      public IActionResult GetPaymentByCustomerID(int customerID)
+      {
+         try
+         {
+            // Tìm các payment dựa trên CustomerID
+            var payments = _db.Payments.Where(o => o.CustomerID == customerID).ToList();
+
+            // Kiểm tra xem có payment nào không
+            if (payments == null || !payments.Any())
+            {
+               // Trả về NotFound nếu không tìm thấy payment
+               return NotFound("No payments found for the given customer ID.");
+            }
+
+            // Trả về danh sách các payment
+            return Ok(payments);
+         }
+         catch (Exception ex)
+         {
+            // Trả về StatusCode 500 nếu có lỗi xảy ra
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+         }
+      }
     }
 }

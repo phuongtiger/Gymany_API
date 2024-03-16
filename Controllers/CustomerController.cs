@@ -169,5 +169,15 @@ namespace Gymany_API.Controllers
          }
          return Ok(obj);
       }
+      [HttpGet("username", Name = "CheckUsername")]
+      public IActionResult CheckUsername(string username)
+      {
+         var obj = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username));
+         if (obj == null)
+         {
+            return NotFound();
+         }
+         return Ok(obj);
+      }
    }
 }
