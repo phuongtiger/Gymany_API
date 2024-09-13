@@ -36,7 +36,7 @@ namespace Gymany_API.Controllers
          public IActionResult GetWorkoutByPTID(int ptid)
          {
             // Tìm tất cả các bài viết với ptid là khóa chính
-            var workoutPlans = this._db.WorkoutPlans.Where(p => p.PTID == ptid).ToList();
+            var workoutPlans = this._db.WorkoutPlans.Where(p => p.pt_id == ptid).ToList();
 
             // Kiểm tra xem có bài viết nào không
             if (workoutPlans == null || workoutPlans.Count == 0)
@@ -47,21 +47,26 @@ namespace Gymany_API.Controllers
             // Trả về danh sách bài viết
             return Ok(workoutPlans);
          }
-         [HttpGet("MemberID", Name = "GetWorkoutByMemID")]
-         public IActionResult GetWorkoutByMemID(int memberid)
-         {
-            // Tìm tất cả các bài viết với ptid là khóa chính
-            var workoutPlans = this._db.WorkoutPlans.Where(p => p.MemberID == memberid).ToList();
 
-            // Kiểm tra xem có bài viết nào không
-            if (workoutPlans == null || workoutPlans.Count == 0)
-            {
-               return NotFound();
-            }
 
-            // Trả về danh sách bài viết
-            return Ok(workoutPlans);
-         }
+         // [HttpGet("MemberID", Name = "GetWorkoutByMemID")]
+         // public IActionResult GetWorkoutByMemID(int memberid)
+         // {
+         //    // Tìm tất cả các bài viết với ptid là khóa chính
+         //    var workoutPlans = this._db.WorkoutPlans.Where(p => p.MemberID == memberid).ToList();
+
+         //    // Kiểm tra xem có bài viết nào không
+         //    if (workoutPlans == null || workoutPlans.Count == 0)
+         //    {
+         //       return NotFound();
+         //    }
+
+         //    // Trả về danh sách bài viết
+         //    return Ok(workoutPlans);
+         // }
+
+
+         
         [HttpPost]
          public IActionResult Create(WorkoutPlan obj)
          {
@@ -71,7 +76,7 @@ namespace Gymany_API.Controllers
             }
             this._db.WorkoutPlans.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetWorkoutPlanByID", new{id = obj.WorkoutPlanID, obj});
+            return CreatedAtRoute("GetWorkoutPlanByID", new{id = obj.workout_id, obj});
          }
 
         [HttpPut("Id")]
@@ -81,10 +86,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            WorkoutPlan cus = this._db.WorkoutPlans.AsNoTracking().FirstOrDefault(c => c.WorkoutPlanID == id);//loi khi bi entities theo doi
+            WorkoutPlan cus = this._db.WorkoutPlans.AsNoTracking().FirstOrDefault(c => c.workout_id == id);//loi khi bi entities theo doi
             this._db.WorkoutPlans.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetWorkoutPlanByID", new{id = obj.WorkoutPlanID, obj});
+            return CreatedAtRoute("GetWorkoutPlanByID", new{id = obj.workout_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -96,7 +101,7 @@ namespace Gymany_API.Controllers
             }
             this._db.WorkoutPlans.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetWorkoutPlanByID", new{id = obj.WorkoutPlanID, obj});
+            return CreatedAtRoute("GetWorkoutPlanByID", new{id = obj.workout_id, obj});
          }
     }
 }

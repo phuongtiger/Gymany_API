@@ -10,18 +10,18 @@ namespace Gymany_API.Models
     public class Payment
     {
         [Key]
-        public int PaymentID { get; set; }
+        public int pay_id { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime? pay_date { get; set; }
 
-        public int? Quantity { get; set; }
+        public int? pay_quantity { get; set; }
 
         [ForeignKey("Customer")]
-        public int CustomerID { get; set; }
+        public int cus_id { get; set; }
         public Customer Customer { get; set; }
 
         [ForeignKey("Product")]
-        public int ProductID { get; set; }
+        public int prod_id { get; set; }
         public Product Product { get; set; }
     }
 }

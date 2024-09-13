@@ -19,447 +19,542 @@ namespace Gymany_API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Gymany_API.Models.Cart", b =>
+            modelBuilder.Entity("Gymany_API.Models.Admin", b =>
                 {
-                    b.Property<int>("CartID")
+                    b.Property<int>("admin_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerID")
+                    b.Property<DateTime?>("admin_age")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("admin_email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("admin_name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("admin_password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal?>("admin_salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("admin_username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("admin_id");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("Gymany_API.Models.Cart", b =>
+                {
+                    b.Property<int>("cart_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("cart_quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductID")
+                    b.Property<int>("cus_id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("prod_id")
                         .HasColumnType("int");
 
-                    b.HasKey("CartID");
+                    b.HasKey("cart_id");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("cus_id");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("prod_id");
 
                     b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryID")
+                    b.Property<int>("cate_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
+                    b.Property<string>("cate_description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("cate_img")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("cate_type")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("CategoryID");
+                    b.HasKey("cate_id");
 
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Gymany_API.Models.Customer", b =>
+            modelBuilder.Entity("Gymany_API.Models.Course", b =>
                 {
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("course_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("course_description")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("Age")
+                    b.Property<string>("course_episode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("course_title")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("cus_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("course_id");
+
+                    b.HasIndex("cus_id");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Gymany_API.Models.Customer", b =>
+                {
+                    b.Property<int>("cus_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("cus_address")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("cus_age")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("cus_email")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("cus_image")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("cus_name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("cus_password")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("cus_phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("cus_username")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("CustomerID");
+                    b.HasKey("cus_id");
 
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Gymany_API.Models.GymOwner", b =>
+            modelBuilder.Entity("Gymany_API.Models.Examination", b =>
                 {
-                    b.Property<int>("AdminID")
+                    b.Property<int>("exam_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("Age")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("AdminID");
-
-                    b.ToTable("GymOwners");
-                });
-
-            modelBuilder.Entity("Gymany_API.Models.Member", b =>
-                {
-                    b.Property<int>("MemberID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("course_id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
+                    b.Property<string>("exam_question")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("MemberID");
+                    b.Property<string>("exam_title")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasIndex("CustomerID");
+                    b.Property<int>("pt_id")
+                        .HasColumnType("int");
 
-                    b.ToTable("Members");
+                    b.HasKey("exam_id");
+
+                    b.HasIndex("course_id");
+
+                    b.HasIndex("pt_id");
+
+                    b.ToTable("Examinations");
+                });
+
+            modelBuilder.Entity("Gymany_API.Models.Exercise", b =>
+                {
+                    b.Property<int>("exc_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("exc_description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("exc_guide")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("exc_title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("exc_video")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("exc_id");
+
+                    b.ToTable("Exercise");
+                });
+
+            modelBuilder.Entity("Gymany_API.Models.Lession", b =>
+                {
+                    b.Property<int>("lession_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("course_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("lession_context")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("lesson_topic")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("lession_id");
+
+                    b.HasIndex("course_id");
+
+                    b.ToTable("Lessions");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Notification", b =>
                 {
-                    b.Property<int>("NotificationID")
+                    b.Property<int>("noti_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Context")
+                    b.Property<int>("cus_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("noti_context")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime?>("noti_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PTID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
+                    b.Property<string>("noti_type")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("NotificationID");
+                    b.Property<int>("pt_id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CustomerID");
+                    b.HasKey("noti_id");
 
-                    b.HasIndex("PTID");
+                    b.HasIndex("cus_id");
+
+                    b.HasIndex("pt_id");
 
                     b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Order", b =>
                 {
-                    b.Property<int>("OrderID")
+                    b.Property<int>("order_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("cus_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductID")
+                    b.Property<int>("order_quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime>("order_startDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("order_status")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("Total")
+                    b.Property<decimal>("order_totalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("OrderID");
+                    b.Property<int>("prod_id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CustomerID");
+                    b.HasKey("order_id");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("cus_id");
+
+                    b.HasIndex("prod_id");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Payment", b =>
                 {
-                    b.Property<int>("PaymentID")
+                    b.Property<int>("pay_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("cus_id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime?>("pay_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductID")
+                    b.Property<int?>("pay_quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("prod_id")
                         .HasColumnType("int");
 
-                    b.HasKey("PaymentID");
+                    b.HasKey("pay_id");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("cus_id");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("prod_id");
 
                     b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.PersonalTrainer", b =>
                 {
-                    b.Property<int>("PTID")
+                    b.Property<int>("pt_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("pt_address")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("Age")
+                    b.Property<DateTime?>("pt_age")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("pt_email")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("pt_img")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("pt_name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("pt_password")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("pt_phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<decimal?>("Salary")
+                    b.Property<decimal?>("pt_salary")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("pt_username")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("PTID");
+                    b.HasKey("pt_id");
 
                     b.ToTable("PersonalTrainers");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Post", b =>
                 {
-                    b.Property<int>("PostID")
+                    b.Property<int>("post_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Content")
+                    b.Property<int>("admin_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("cus_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("post_content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime?>("post_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("post_img")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("PTID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StaffID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("post_title")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("PostID");
+                    b.Property<int>("pt_id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("PTID");
+                    b.HasKey("post_id");
 
-                    b.HasIndex("StaffID");
+                    b.HasIndex("admin_id");
+
+                    b.HasIndex("cus_id");
+
+                    b.HasIndex("pt_id");
 
                     b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Product", b =>
                 {
-                    b.Property<int>("ProductID")
+                    b.Property<int>("prod_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Amount")
+                    b.Property<int>("cate_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryID")
+                    b.Property<int?>("prod_amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("prod_description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("prod_img")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("prod_name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal?>("prod_price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ProductID");
+                    b.HasKey("prod_id");
 
-                    b.HasIndex("CategoryID");
+                    b.HasIndex("cate_id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Gymany_API.Models.Staff", b =>
+            modelBuilder.Entity("Gymany_API.Models.SystemAdmin", b =>
                 {
-                    b.Property<int>("StaffID")
+                    b.Property<int>("sysad_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("Age")
+                    b.Property<DateTime?>("sysad_age")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("sysad_email")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("sysad_name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("sysad_password")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal?>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Username")
+                    b.Property<string>("sysad_username")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("StaffID");
+                    b.HasKey("sysad_id");
 
-                    b.ToTable("Staffs");
+                    b.ToTable("SystemAdmins");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.WorkoutPlan", b =>
                 {
-                    b.Property<int>("WorkoutPlanID")
+                    b.Property<int>("workout_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Activity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MemberID")
+                    b.Property<int>("exc_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("pt_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("workout_activity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("workout_description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("workout_endDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("workout_name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("PTID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Session")
+                    b.Property<string>("workout_session")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartDate")
+                    b.Property<DateTime?>("workout_startDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("WorkoutPlanID");
+                    b.HasKey("workout_id");
 
-                    b.HasIndex("MemberID");
+                    b.HasIndex("exc_id");
 
-                    b.HasIndex("PTID");
+                    b.HasIndex("pt_id");
 
                     b.ToTable("WorkoutPlans");
                 });
@@ -468,13 +563,13 @@ namespace Gymany_API.Migrations
                 {
                     b.HasOne("Gymany_API.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("cus_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Gymany_API.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("prod_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -483,28 +578,58 @@ namespace Gymany_API.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Gymany_API.Models.Member", b =>
+            modelBuilder.Entity("Gymany_API.Models.Course", b =>
                 {
                     b.HasOne("Gymany_API.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("cus_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Gymany_API.Models.Notification", b =>
+            modelBuilder.Entity("Gymany_API.Models.Examination", b =>
                 {
-                    b.HasOne("Gymany_API.Models.Customer", "Customer")
+                    b.HasOne("Gymany_API.Models.Course", "Course")
                         .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("course_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Gymany_API.Models.PersonalTrainer", "PersonalTrainer")
                         .WithMany()
-                        .HasForeignKey("PTID")
+                        .HasForeignKey("pt_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("PersonalTrainer");
+                });
+
+            modelBuilder.Entity("Gymany_API.Models.Lession", b =>
+                {
+                    b.HasOne("Gymany_API.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("course_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Gymany_API.Models.Notification", b =>
+                {
+                    b.HasOne("Gymany_API.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("cus_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gymany_API.Models.PersonalTrainer", "PersonalTrainer")
+                        .WithMany()
+                        .HasForeignKey("pt_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -517,13 +642,13 @@ namespace Gymany_API.Migrations
                 {
                     b.HasOne("Gymany_API.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("cus_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Gymany_API.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("prod_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -536,13 +661,13 @@ namespace Gymany_API.Migrations
                 {
                     b.HasOne("Gymany_API.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("cus_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Gymany_API.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("prod_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -553,28 +678,36 @@ namespace Gymany_API.Migrations
 
             modelBuilder.Entity("Gymany_API.Models.Post", b =>
                 {
+                    b.HasOne("Gymany_API.Models.Admin", "Admin")
+                        .WithMany()
+                        .HasForeignKey("admin_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gymany_API.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("cus_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Gymany_API.Models.PersonalTrainer", "PersonalTrainer")
                         .WithMany()
-                        .HasForeignKey("PTID")
+                        .HasForeignKey("pt_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gymany_API.Models.Staff", "Staff")
-                        .WithMany()
-                        .HasForeignKey("StaffID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Admin");
+
+                    b.Navigation("Customer");
 
                     b.Navigation("PersonalTrainer");
-
-                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("Gymany_API.Models.Product", b =>
                 {
                     b.HasOne("Gymany_API.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryID")
+                        .HasForeignKey("cate_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -583,19 +716,19 @@ namespace Gymany_API.Migrations
 
             modelBuilder.Entity("Gymany_API.Models.WorkoutPlan", b =>
                 {
-                    b.HasOne("Gymany_API.Models.Member", "Member")
+                    b.HasOne("Gymany_API.Models.Exercise", "Exercise")
                         .WithMany()
-                        .HasForeignKey("MemberID")
+                        .HasForeignKey("exc_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Gymany_API.Models.PersonalTrainer", "PersonalTrainer")
                         .WithMany()
-                        .HasForeignKey("PTID")
+                        .HasForeignKey("pt_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Member");
+                    b.Navigation("Exercise");
 
                     b.Navigation("PersonalTrainer");
                 });

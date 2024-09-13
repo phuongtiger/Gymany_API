@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Gymany_API.props" />
+</Project>

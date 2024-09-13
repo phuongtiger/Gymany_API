@@ -41,7 +41,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Products.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetProductByID", new{id = obj.ProductID, obj});
+            return CreatedAtRoute("GetProductByID", new{id = obj.prod_id, obj});
          }
 
         [HttpPut("Id")]
@@ -51,10 +51,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Product cus = this._db.Products.AsNoTracking().FirstOrDefault(c => c.ProductID == id);//loi khi bi entities theo doi
+            Product cus = this._db.Products.AsNoTracking().FirstOrDefault(c => c.prod_id == id);//loi khi bi entities theo doi
             this._db.Products.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetProductByID", new{id = obj.ProductID, obj});
+            return CreatedAtRoute("GetProductByID", new{id = obj.prod_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -66,7 +66,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Products.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetProductByID", new{id = obj.ProductID, obj});
+            return CreatedAtRoute("GetProductByID", new{id = obj.prod_id, obj});
          }
          
          

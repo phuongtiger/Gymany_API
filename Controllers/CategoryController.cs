@@ -41,7 +41,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Categories.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetCategories", new{id = obj.CategoryID, obj});
+            return CreatedAtRoute("GetCategories", new{id = obj.cate_id, obj});
          }
 
         [HttpPut("Id")]
@@ -51,10 +51,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Category cus = this._db.Categories.AsNoTracking().FirstOrDefault(c => c.CategoryID == id);//loi khi bi entities theo doi
+            Category cus = this._db.Categories.AsNoTracking().FirstOrDefault(c => c.cate_id == id);//loi khi bi entities theo doi
             this._db.Categories.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetCategories", new{id = obj.CategoryID, obj});
+            return CreatedAtRoute("GetCategories", new{id = obj.cate_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -66,7 +66,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Categories.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetCategories", new{id = obj.CategoryID, obj});
+            return CreatedAtRoute("GetCategories", new{id = obj.cate_id, obj});
          }
     }
 }

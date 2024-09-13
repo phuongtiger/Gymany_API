@@ -42,7 +42,7 @@ namespace Gymany_API.Controllers
             }
             this._db.PersonalTrainers.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new{id = obj.PTID, obj});
+            return CreatedAtRoute("GetPTByID", new{id = obj.pt_id, obj});
          }
 
         [HttpPut("Id")]
@@ -52,10 +52,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            PersonalTrainer cus = this._db.PersonalTrainers.AsNoTracking().FirstOrDefault(c => c.PTID == id);//loi khi bi entities theo doi
+            PersonalTrainer cus = this._db.PersonalTrainers.AsNoTracking().FirstOrDefault(c => c.pt_id == id);//loi khi bi entities theo doi
             this._db.PersonalTrainers.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new{id = obj.PTID, obj});
+            return CreatedAtRoute("GetPTByID", new{id = obj.pt_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -67,12 +67,12 @@ namespace Gymany_API.Controllers
             }
             this._db.PersonalTrainers.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new{id = obj.PTID, obj});
+            return CreatedAtRoute("GetPTByID", new{id = obj.pt_id, obj});
          }
          [HttpPost("checklogin")]
          public IActionResult CheckLogin(string email, string password)
          {
-            var obj = this._db.PersonalTrainers.AsNoTracking().FirstOrDefault(c => c.Email.Equals(email) && c.Password.Equals(password));
+            var obj = this._db.PersonalTrainers.AsNoTracking().FirstOrDefault(c => c.pt_email.Equals(email) && c.pt_password.Equals(password));
             if (obj == null)
             {
                return NotFound();

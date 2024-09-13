@@ -9,14 +9,14 @@ namespace Gymany_API.Models
     public class Category
     {
          [Key]
-        public int CategoryID { get; set; }
+        public int cate_id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Type { get; set; }
+        public string cate_type { get; set; }
         [StringLength(200)]
-        public string Image { get; set; }
+        public string cate_img { get; set; }
 
-        public string Description { get; set; }
+        public string cate_description { get; set; }
     }
 }

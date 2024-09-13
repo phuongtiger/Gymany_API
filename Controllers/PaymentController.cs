@@ -41,7 +41,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Payments.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPaymentByID", new{id = obj.PaymentID, obj});
+            return CreatedAtRoute("GetPaymentByID", new{id = obj.pay_id, obj});
          }
 
         [HttpPut("Id")]
@@ -51,10 +51,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Payment cus = this._db.Payments.AsNoTracking().FirstOrDefault(c => c.PaymentID == id);//loi khi bi entities theo doi
+            Payment cus = this._db.Payments.AsNoTracking().FirstOrDefault(c => c.pay_id == id);//loi khi bi entities theo doi
             this._db.Payments.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPaymentByID", new{id = obj.PaymentID, obj});
+            return CreatedAtRoute("GetPaymentByID", new{id = obj.pay_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -66,7 +66,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Payments.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPaymentByID", new{id = obj.PaymentID, obj});
+            return CreatedAtRoute("GetPaymentByID", new{id = obj.pay_id, obj});
          }
          [HttpGet("GetCusIdPayment", Name = "GetPaymentByCustomerID")]
       public IActionResult GetPaymentByCustomerID(int customerID)
@@ -74,7 +74,7 @@ namespace Gymany_API.Controllers
          try
          {
             // Tìm các payment dựa trên CustomerID
-            var payments = _db.Payments.Where(o => o.CustomerID == customerID).ToList();
+            var payments = _db.Payments.Where(o => o.cus_id == customerID).ToList();
 
             // Kiểm tra xem có payment nào không
             if (payments == null || !payments.Any())

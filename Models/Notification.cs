@@ -10,21 +10,21 @@ namespace Gymany_API.Models
     public class Notification
     {
         [Key]
-        public int NotificationID { get; set; }
+        public int noti_id { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime? noti_date { get; set; }
 
-        public string Context { get; set; }
+        public string noti_context { get; set; }
 
         [StringLength(50)]
-        public string Type { get; set; }
+        public string noti_type { get; set; }
 
         [ForeignKey("Customer")]
-        public int CustomerID { get; set; }
+        public int cus_id { get; set; }
         public Customer Customer { get; set; }
 
         [ForeignKey("PersonalTrainer")]
-        public int PTID { get; set; }
+        public int pt_id { get; set; }
         public PersonalTrainer PersonalTrainer { get; set; }
     }
 }

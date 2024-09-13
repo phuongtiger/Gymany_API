@@ -21,7 +21,7 @@ namespace Gymany_API.Controllers
         [HttpGet]
         public IActionResult GetOrder()
         {
-            IEnumerable<Order> list = this._db.Orders.OrderByDescending(n => n.OrderID).ToList();
+            IEnumerable<Order> list = this._db.Orders.OrderByDescending(n => n.order_id).ToList();
             return Ok(list);
         }
         [HttpGet("id", Name = "GetOrderByID")]
@@ -43,7 +43,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Orders.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetOrderByID", new { id = obj.OrderID, obj });
+            return CreatedAtRoute("GetOrderByID", new { id = obj.order_id, obj });
         }
 
         [HttpPut("Id")]
@@ -53,10 +53,10 @@ namespace Gymany_API.Controllers
             {
                 return BadRequest("...");
             }
-            Order cus = this._db.Orders.AsNoTracking().FirstOrDefault(c => c.OrderID == id);//loi khi bi entities theo doi
+            Order cus = this._db.Orders.AsNoTracking().FirstOrDefault(c => c.order_id == id);//loi khi bi entities theo doi
             this._db.Orders.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new { id = obj.OrderID, obj });
+            return CreatedAtRoute("GetPTByID", new { id = obj.order_id, obj });
         }
         [HttpDelete("Id")]
         public IActionResult Delete(int id)
@@ -68,7 +68,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Orders.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new { id = obj.OrderID, obj });
+            return CreatedAtRoute("GetPTByID", new { id = obj.order_id, obj });
         }
 
         [HttpGet("CustomerID", Name = "CopyDataFromCartToOrder")]
@@ -79,7 +79,7 @@ namespace Gymany_API.Controllers
                 // Tìm các mục trong giỏ hàng dựa trên CustomerID
                 var products = _db.Products.ToList();
                 var cartItems = await _db.Carts
-                                        .Where(c => c.CustomerID == customerID)
+                                        .Where(c => c.cus_id == customerID)
                                         .ToListAsync();
 
                 if (cartItems == null || cartItems.Count == 0)
@@ -89,20 +89,20 @@ namespace Gymany_API.Controllers
                 List<int> listOrderID = new List<int>();
                 foreach (var cartItem in cartItems)
                 {
-                    var productForPrice = products.FirstOrDefault(c => c.ProductID == cartItem.ProductID);
+                    var productForPrice = products.FirstOrDefault(c => c.prod_id == cartItem.prod_id);
                     var orderItem = new Order
                     {
-                        CustomerID = cartItem.CustomerID,
-                        ProductID = cartItem.ProductID,
-                        Status = "Waiting", // Thiết lập trạng thái mới cho đơn hàng
-                        StartDate = DateTime.Now, // Thiết lập ngày bắt đầu cho đơn hàng
-                        Total = (int)productForPrice.Price * (int)cartItem.Quantity, // Khởi tạo tổng tiền
-                        Quantity = cartItem.Quantity ?? 0 // Lấy số lượng từ giỏ hàng
+                        cus_id = cartItem.cus_id,
+                        prod_id = cartItem.prod_id,
+                        order_status = "Waiting", // Thiết lập trạng thái mới cho đơn hàng
+                        order_startDate = DateTime.Now, // Thiết lập ngày bắt đầu cho đơn hàng
+                        order_totalPrice = (int)productForPrice.prod_price * (int)cartItem.cart_quantity, // Khởi tạo tổng tiền
+                        order_quantity = cartItem.cart_quantity ?? 0 // Lấy số lượng từ giỏ hàng
                     };
                     _db.Orders.Add(orderItem);
                     _db.Carts.Remove(cartItem);
                     await _db.SaveChangesAsync();
-                    listOrderID.Add(_db.Orders.Max(o => o.OrderID));
+                    listOrderID.Add(_db.Orders.Max(o => o.order_id));
                 }
                 return Ok(listOrderID);
             }
@@ -120,7 +120,7 @@ namespace Gymany_API.Controllers
                 IEnumerable<Product> listP = this._db.Products.ToList();
                 IEnumerable<Customer> listCu = this._db.Customers.ToList();
                 // Tìm các đơn hàng dựa trên CustomerID
-                var orders = _db.Orders.Where(o => o.CustomerID == customerID).OrderByDescending(n => n.OrderID).ToList();
+                var orders = _db.Orders.Where(o => o.cus_id == customerID).OrderByDescending(n => n.order_id).ToList();
 
                 // Kiểm tra xem có đơn hàng nào không
                 if (orders == null || !orders.Any())

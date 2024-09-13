@@ -41,7 +41,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Carts.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetCartByID", new{id = obj.CartID, obj});
+            return CreatedAtRoute("GetCartByID", new{id = obj.cart_id, obj});
          }
 
         [HttpPut("Id")]
@@ -51,10 +51,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Cart cus = this._db.Carts.AsNoTracking().FirstOrDefault(c => c.CartID == id);//loi khi bi entities theo doi
+            Cart cus = this._db.Carts.AsNoTracking().FirstOrDefault(c => c.cart_id == id);//loi khi bi entities theo doi
             this._db.Carts.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetCartByID", new{id = obj.CartID, obj});
+            return CreatedAtRoute("GetCartByID", new{id = obj.cart_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -66,7 +66,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Carts.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetCartByID", new{id = obj.CartID, obj});
+            return CreatedAtRoute("GetCartByID", new{id = obj.cart_id, obj});
          }
          [HttpGet("CustomerID", Name = "GetCartByCustomerID")]
          public IActionResult GetCartByCustomerID(int CustomerID)
@@ -74,7 +74,7 @@ namespace Gymany_API.Controllers
             IEnumerable<Product> listP = this._db.Products.ToList();
             IEnumerable<Customer> listCu = this._db.Customers.ToList();
             // Tìm tất cả các bài viết với ptid là khóa chính
-            var carts = this._db.Carts.Where(cu => cu.CustomerID == CustomerID).ToList();
+            var carts = this._db.Carts.Where(cu => cu.cus_id == CustomerID).ToList();
 
             // Kiểm tra xem có bài viết nào không
             if (carts == null || carts.Count == 0)
@@ -101,21 +101,21 @@ namespace Gymany_API.Controllers
             }
 
             // Check if the product already exists in the customer's cart
-            var existingCart = await _db.Carts.FirstOrDefaultAsync(c => c.CustomerID == customerID && c.ProductID == productID);
+            var existingCart = await _db.Carts.FirstOrDefaultAsync(c => c.cus_id == customerID && c.prod_id == productID);
 
             if (existingCart != null)
             {
                // If the product exists, increase the quantity by 1
-               existingCart.Quantity++;
+               existingCart.cart_quantity++;
             }
             else
             {
                // If the product doesn't exist, create a new cart item
                var newCart = new Cart
                {
-                  CustomerID = customerID,
-                  ProductID = productID,
-                  Quantity = 1 // Initial quantity is 1
+                  cus_id = customerID,
+                  prod_id = productID,
+                  cart_quantity = 1 // Initial quantity is 1
                };
                _db.Carts.Add(newCart);
             }
@@ -191,7 +191,7 @@ namespace Gymany_API.Controllers
                 return NotFound();
             }
 
-            cartItem.Quantity = quantity;
+            cartItem.cart_quantity = quantity;
 
             try
             {

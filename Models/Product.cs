@@ -10,22 +10,22 @@ namespace Gymany_API.Models
     public class Product
     {
         [Key]
-        public int ProductID { get; set; }
+        public int prod_id { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string prod_name { get; set; }
 
-        public string Description { get; set; }
+        public string prod_description { get; set; }
 
-        public int? Amount { get; set; }
+        public int? prod_amount { get; set; }
 
         [StringLength(200)]
-        public string Image { get; set; }
+        public string prod_img { get; set; }
 
-        public decimal? Price { get; set; }
+        public decimal? prod_price { get; set; }
 
         [ForeignKey("Category")]
-        public int CategoryID { get; set; }
+        public int cate_id { get; set; }
         public Category Category { get; set; }
     }
 }

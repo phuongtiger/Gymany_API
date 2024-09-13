@@ -10,24 +10,28 @@ namespace Gymany_API.Models
     public class Post
     {
         [Key]
-        public int PostID { get; set; }
+        public int post_id { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime? post_date { get; set; }
 
-        public string Content { get; set; }
+        public string post_content { get; set; }
 
         [StringLength(100)]
-        public string Title { get; set; }
+        public string post_title { get; set; }
 
         [StringLength(200)]
-        public string Image { get; set; }
+        public string post_img { get; set; }
 
         [ForeignKey("PersonalTrainer")]
-        public int PTID { get; set; }
+        public int pt_id { get; set; }
         public PersonalTrainer PersonalTrainer { get; set; }
 
-        [ForeignKey("Staff")]
-        public int StaffID { get; set; }
-        public Staff Staff { get; set; }
+        [ForeignKey("Customer")]
+        public int cus_id { get; set; }
+        public Customer Customer { get; set; }
+
+        [ForeignKey("Admin")]
+        public int admin_id { get; set; }
+        public Admin Admin { get; set; }
     }
 }
