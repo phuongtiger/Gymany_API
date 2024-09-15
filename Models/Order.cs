@@ -12,8 +12,6 @@ namespace Gymany_API.Models
         [Key]
         public int order_id { get; set; }
 
-        
-
         [StringLength(50)]
         public string order_status { get; set; }
 

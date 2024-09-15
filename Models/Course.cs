@@ -24,5 +24,13 @@ namespace Gymany_API.Models
         [ForeignKey("Customer")]
         public int cus_id { get; set; }
         public Customer Customer { get; set; }
+
+        [ForeignKey("WorkoutPlan")]
+        public int workout_id { get; set; }
+        public WorkoutPlan WorkoutPlan { get; set; }
+
+        [ForeignKey("PersonalTrainer")]
+        public int pt_id { get; set; }
+        public PersonalTrainer PersonalTrainer { get; set; }
     }
 }
