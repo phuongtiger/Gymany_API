@@ -1,77 +1,34 @@
-# .NET Core
+# From .NET Core 3.0 you can use the command: `dotnet new gitignore` to generate a customizable .gitignore file
+
+*.swp
+*.*~
 project.lock.json
-project.fragment.lock.json
-artifacts/
+.DS_Store
+*.pyc
 
-# NuGet
-*.nupkg
-*.snupkg
-project.assets.json
-**/packages/*
-# The packages folder can be ignored because of https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files
-# Uncomment if necessary however generally it will be regenerated when needed
-# **/packages/*
-
-# .NET Core
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# Include if you have a global.json file and want to avoid pulling in too many SDKs
-# .dotnet/
+# Visual Studio Code
+.vscode
 
 # User-specific files
-*.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
-# Mono Auto Generated Files
-mono_crash.*
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+msbuild.log
+msbuild.err
+msbuild.wrn
 
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-.vscode/*
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# Rider
-.idea/
-
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
-
-# Azure Functions artifacts
-bin/
-obj/
-
-# VS Code Settings
-.vscode/
-
-# Visual Studio profiler
-*.psess
-*.vsp
-*.vspx
-*.sap
-
-# Other popular content
-## Ignore Office temporary files
-~$*
+# Visual Studio 2015
+.vs/
