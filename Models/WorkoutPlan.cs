@@ -10,27 +10,37 @@ namespace Gymany_API.Models
     public class WorkoutPlan
     {
         [Key]
-        public int WorkoutPlanID { get; set; }
+        public int workout_id { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string workout_name { get; set; }
 
-        public DateTime? StartDate { get; set; }
+        public DateTime? workout_startDate { get; set; }
 
-        public DateTime? EndDate { get; set; }
+        public DateTime? workout_endDate { get; set; }
 
-        public string Description { get; set; }
+        public string workout_description { get; set; }
 
-        public string Session { get; set; }
+        public string workout_session { get; set; }
 
-        public string Activity { get; set; }
+        public string workout_activity { get; set; }
 
-        [ForeignKey("Member")]
-        public int MemberID { get; set; }
-        public Member Member { get; set; }
 
         [ForeignKey("PersonalTrainer")]
-        public int PTID { get; set; }
+        public int pt_id { get; set; }
         public PersonalTrainer PersonalTrainer { get; set; }
+
+        [ForeignKey("Exercise")]
+        public int exc_id { get; set; }
+        public Exercise Exercise { get; set; }
+
+        [ForeignKey("Customer")]
+        public int cus_id { get; set; }
+        public Customer Customer { get; set; }
+
+        public List<Course> Courses { get; set; }
+
+        
+
     }
 }

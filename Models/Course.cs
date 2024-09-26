@@ -7,24 +7,32 @@ using System.Threading.Tasks;
 
 namespace Gymany_API.Models
 {
-    public class Notification
+    public class Course
     {
         [Key]
-        public int noti_id { get; set; }
-
-        public DateTime? noti_date { get; set; }
-
-        public string noti_context { get; set; }
+        public int course_id { get; set; }
 
         [StringLength(50)]
-        public string noti_type { get; set; }
+        public string course_title { get; set; }
+
+        [StringLength(50)]
+        public string course_description { get; set; }
+
+        [StringLength(50)]
+        public string course_episode { get; set; }
 
         [ForeignKey("Customer")]
         public int cus_id { get; set; }
         public Customer Customer { get; set; }
 
+        [ForeignKey("WorkoutPlan")]
+        public int workout_id { get; set; }
+        public WorkoutPlan WorkoutPlan { get; set; }
+
         [ForeignKey("PersonalTrainer")]
         public int pt_id { get; set; }
         public PersonalTrainer PersonalTrainer { get; set; }
+
+        public List<Examination> Examinations { get; set; }
     }
 }

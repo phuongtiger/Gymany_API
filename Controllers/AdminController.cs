@@ -12,24 +12,24 @@ namespace Gymany_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StaffController : ControllerBase
+    public class AdminController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        public StaffController(ApplicationDbContext db)
+        public AdminController(ApplicationDbContext db)
         {
             this._db = db;
         }
 
         [HttpGet]
-        public IActionResult GetStaff()
+        public IActionResult GetAdmin()
         {
-            IEnumerable<Staff> list = this._db.Staffs.ToList();
+            IEnumerable<Admin> list = this._db.Admins.ToList();
             return Ok(list);
         }
-        [HttpGet("id", Name = "GetStaffByID")]
-        public IActionResult GetStaffByID(int id)
+        [HttpGet("id", Name = "GetAdminByID")]
+        public IActionResult GetAdminByID(int id)
         {
-            var obj = this._db.Staffs.Find(id);
+            var obj = this._db.Admins.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -37,45 +37,45 @@ namespace Gymany_API.Controllers
             return Ok(obj);
         }
         [HttpPost]
-        public IActionResult Create(Staff obj)
+        public IActionResult Create(Admin obj)
         {
             if (obj == null)
             {
                 return BadRequest("...");
             }
-            this._db.Staffs.Add(obj);
+            this._db.Admins.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetStaffByID", new { id = obj.StaffID, obj });
+            return CreatedAtRoute("GetAdminByID", new { id = obj.admin_id, obj });
         }
 
         [HttpPut("Id")]
-        public IActionResult Edit(int id, Staff obj)
+        public IActionResult Edit(int id, Admin obj)
         {
             if (obj == null)
             {
                 return BadRequest("...");
             }
-            Staff cus = this._db.Staffs.AsNoTracking().FirstOrDefault(c => c.StaffID == id);//loi khi bi entities theo doi
-            this._db.Staffs.Update(obj);
+            Admin cus = this._db.Admins.AsNoTracking().FirstOrDefault(c => c.admin_id == id);//loi khi bi entities theo doi
+            this._db.Admins.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new { id = obj.StaffID, obj });
+            return CreatedAtRoute("GetPTByID", new { id = obj.admin_id, obj });
         }
         [HttpDelete("Id")]
         public IActionResult Delete(int id)
         {
-            Staff obj = this._db.Staffs.Find(id);
+            Admin obj = this._db.Admins.Find(id);
             if (obj == null)
             {
                 return NotFound();
             }
-            this._db.Staffs.Remove(obj);
+            this._db.Admins.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPTByID", new { id = obj.StaffID, obj });
+            return CreatedAtRoute("GetPTByID", new { id = obj.admin_id, obj });
         }
         [HttpPost("checklogin")]
         public IActionResult CheckLogin(string username, string password)
         {
-            var obj = this._db.Staffs.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username) && c.Password.Equals(password));
+            var obj = this._db.Admins.AsNoTracking().FirstOrDefault(c => c.admin_username.Equals(username) && c.admin_password.Equals(password));
             if (obj == null)
             {
                 return NotFound();

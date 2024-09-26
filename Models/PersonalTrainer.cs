@@ -9,34 +9,34 @@ namespace Gymany_API.Models
     public class PersonalTrainer
     {
         [Key]
-        public int PTID { get; set; }
+        public int pt_id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Username { get; set; }
+        public string pt_username { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Password { get; set; }
+        public string pt_password { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string pt_name { get; set; }
 
-        public DateTime? Age { get; set; }
+        public DateTime? pt_age { get; set; }
 
         [StringLength(50)]
-        public string Address { get; set; }
+        public string pt_address { get; set; }
 
-        public decimal? Salary { get; set; }
+        public decimal? pt_salary { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Email { get; set; }
-
-        [StringLength(200)]
-        public string Image { get; set; }
+        public string pt_email { get; set; }
 
         [StringLength(20)]
-        public string Phone { get; set; }
+        public string pt_phone { get; set; }
+
+        [StringLength(200)]
+        public string pt_img { get; set; }
     }
 }

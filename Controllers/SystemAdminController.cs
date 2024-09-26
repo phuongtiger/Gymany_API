@@ -10,22 +10,22 @@ namespace Gymany_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GymOwnerController : ControllerBase
+    public class SystemAdminController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        public GymOwnerController(ApplicationDbContext db){
+        public SystemAdminController(ApplicationDbContext db){
             this._db = db;
         } 
         [HttpGet]
-        public IActionResult GetGymOwner()
+        public IActionResult GetSystemAdmin()
         {
-            IEnumerable<GymOwner> list = this._db.GymOwners.ToList();
+            IEnumerable<SystemAdmin> list = this._db.SystemAdmins.ToList();
             return Ok(list);
         }
-        [HttpGet("id", Name = "GetGymOwnerByID")]
-        public IActionResult GetGymOwnerByID(int id)
+        [HttpGet("id", Name = "GetSystemAdminByID")]
+        public IActionResult GetSystemAdminByID(int id)
         {
-            var obj = this._db.GymOwners.Find(id);
+            var obj = this._db.SystemAdmins.Find(id);
             if (obj==null)
             {
                return NotFound(); 
@@ -33,20 +33,20 @@ namespace Gymany_API.Controllers
             return Ok(obj);
         }
         [HttpPost]
-         public IActionResult Create(GymOwner obj)
+         public IActionResult Create(SystemAdmin obj)
          {
             if (obj == null)
             {
                return BadRequest("..."); 
             }
-            this._db.GymOwners.Add(obj);
+            this._db.SystemAdmins.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetGymOwnerByID", new{id = obj.AdminID, obj});
+            return CreatedAtRoute("GetSystemAdminByID", new{id = obj.sysad_id, obj});
          }
          [HttpPost("checklogin")]
          public IActionResult CheckLogin(string username, string password)
          {
-         var obj = this._db.GymOwners.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username) && c.Password.Equals(password));
+         var obj = this._db.SystemAdmins.AsNoTracking().FirstOrDefault(c => c.sysad_username.Equals(username) && c.sysad_password.Equals(password));
             if (obj == null)
             {
                return NotFound();
@@ -54,28 +54,28 @@ namespace Gymany_API.Controllers
             return Ok(obj);
          }
         [HttpPut("Id")]
-         public IActionResult Edit(int id, GymOwner obj)
+         public IActionResult Edit(int id, SystemAdmin obj)
          {
             if (obj==null)
             {
                return BadRequest("..."); 
             }
-            GymOwner cus = this._db.GymOwners.AsNoTracking().FirstOrDefault(c => c.AdminID == id);//loi khi bi entities theo doi
-            this._db.GymOwners.Update(obj);
+            SystemAdmin cus = this._db.SystemAdmins.AsNoTracking().FirstOrDefault(c => c.sysad_id == id);//loi khi bi entities theo doi
+            this._db.SystemAdmins.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetGymOwnerByID", new{id = obj.AdminID, obj});
+            return CreatedAtRoute("GetSystemAdminByID", new{id = obj.sysad_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
          {
-            GymOwner obj = this._db.GymOwners.Find(id);
+            SystemAdmin obj = this._db.SystemAdmins.Find(id);
             if (obj == null)
             {
                return NotFound(); 
             }
-            this._db.GymOwners.Remove(obj);
+            this._db.SystemAdmins.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetGymOwnerByID", new{id = obj.AdminID, obj});
+            return CreatedAtRoute("GetSystemAdminByID", new{id = obj.sysad_id, obj});
          }
     }
 }

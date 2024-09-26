@@ -49,7 +49,7 @@ namespace Gymany_API.Controllers
          }
          this._db.Customers.Add(obj);
          this._db.SaveChanges();
-         return CreatedAtRoute("GetCustomerByID", new { id = obj.CustomerID, obj });
+         return CreatedAtRoute("GetCustomerByID", new { id = obj.cus_id, obj });
       }
 
       [HttpPut("Id")]
@@ -59,10 +59,10 @@ namespace Gymany_API.Controllers
          {
             return BadRequest("...");
          }
-         Customer cus = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.CustomerID == id);//loi khi bi entities theo doi
+         Customer cus = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.cus_id == id);//loi khi bi entities theo doi
          this._db.Customers.Update(obj);
          this._db.SaveChanges();
-         return CreatedAtRoute("GetCustomerByID", new { id = obj.CustomerID, obj });
+         return CreatedAtRoute("GetCustomerByID", new { id = obj.cus_id, obj });
       }
 
       [HttpDelete("Id")]
@@ -75,13 +75,13 @@ namespace Gymany_API.Controllers
          }
          this._db.Customers.Remove(obj);
          this._db.SaveChanges();
-         return CreatedAtRoute("GetCustomerByID", new { id = obj.CustomerID, obj });
+         return CreatedAtRoute("GetCustomerByID", new { id = obj.cus_id, obj });
       }
 
       [HttpGet("email", Name = "GetCustomerByEmail")]
       public IActionResult GetCustomerByEmail(string email)
       {
-         var obj = this._db.Customers.FirstOrDefault(c => c.Email == email);
+         var obj = this._db.Customers.FirstOrDefault(c => c.cus_email == email);
          if (obj == null)
          {
             return NotFound();
@@ -92,17 +92,17 @@ namespace Gymany_API.Controllers
       [HttpPost("forgotpassword")]
       public IActionResult ForgotPassword(string email)
       {
-         var customer = _db.Customers.FirstOrDefault(c => c.Email == email);
+         var customer = _db.Customers.FirstOrDefault(c => c.cus_email == email);
          if (customer == null)
          {
             return NotFound("Không tìm thấy khách hàng với địa chỉ email này.");
          }
 
          var newPassword = GenerateRandomPassword();
-         customer.Password = EncryptPassword(newPassword); // Encrypt the new password before saving
+         customer.cus_password = EncryptPassword(newPassword); // Encrypt the new password before saving
          _db.SaveChanges();
 
-         SendPasswordEmail(email, customer.Password);
+         SendPasswordEmail(email, customer.cus_password);
 
          return Ok("Một email chứa mật khẩu mới đã được gửi đến địa chỉ email của bạn.");
       }
@@ -162,7 +162,7 @@ namespace Gymany_API.Controllers
       [HttpPost("checklogin")]
       public IActionResult CheckLogin(string username, string password)
       {
-         var obj = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username) && c.Password.Equals(password));
+         var obj = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.cus_username.Equals(username) && c.cus_password.Equals(password));
          if (obj == null)
          {
             return NotFound();
@@ -172,7 +172,7 @@ namespace Gymany_API.Controllers
       [HttpGet("username", Name = "CheckUsername")]
       public IActionResult CheckUsername(string username)
       {
-         var obj = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.Username.Equals(username));
+         var obj = this._db.Customers.AsNoTracking().FirstOrDefault(c => c.cus_username.Equals(username));
          if (obj == null)
          {
             return NotFound();

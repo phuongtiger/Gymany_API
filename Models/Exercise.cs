@@ -6,28 +6,23 @@ using System.Threading.Tasks;
 
 namespace Gymany_API.Models
 {
-    public class Staff
+    public class Exercise
     {
         [Key]
-        public int StaffID { get; set; }
+        public int exc_id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Username { get; set; }
+        public string exc_title { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Password { get; set; }
+        public string exc_description { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string exc_guide { get; set; }
 
-        public DateTime? Age { get; set; }
-
-        public decimal? Salary { get; set; }
-
-        [Required]
         [StringLength(50)]
-        public string Email { get; set; }
+        public string exc_video { get; set; }
     }
 }

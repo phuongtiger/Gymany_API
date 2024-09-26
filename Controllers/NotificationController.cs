@@ -25,7 +25,7 @@ namespace Gymany_API.Controllers
         [HttpGet("id", Name = "GetNotiByCustomerID")]
         public IActionResult GetNotiByCustomerID(int id)
         {
-            var obj = this._db.Notifications.Where(n => n.CustomerID == id).OrderByDescending(n => n.NotificationID).ToList();
+            var obj = this._db.Notifications.Where(n => n.cus_id == id).OrderByDescending(n => n.noti_id).ToList();
             if (obj==null)
             {
                return NotFound(); 
@@ -41,7 +41,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Notifications.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetNotificationByID", new{id = obj.NotificationID, obj});
+            return CreatedAtRoute("GetNotificationByID", new{id = obj.noti_id, obj});
          }
 
         [HttpPut("Id")]
@@ -51,10 +51,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Notification cus = this._db.Notifications.AsNoTracking().FirstOrDefault(c => c.NotificationID == id);//loi khi bi entities theo doi
+            Notification cus = this._db.Notifications.AsNoTracking().FirstOrDefault(c => c.noti_id == id);//loi khi bi entities theo doi
             this._db.Notifications.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetNotificationByID", new{id = obj.NotificationID, obj});
+            return CreatedAtRoute("GetNotificationByID", new{id = obj.noti_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -66,7 +66,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Notifications.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetNotificationByID", new{id = obj.NotificationID, obj});
+            return CreatedAtRoute("GetNotificationByID", new{id = obj.noti_id, obj});
          }
     }
 }

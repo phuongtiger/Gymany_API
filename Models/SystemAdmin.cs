@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace Gymany_API.Models
 {
-    public class GymOwner
+    public class SystemAdmin
     {
         [Key]
-        public int AdminID { get; set; }
+        public int sysad_id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Username { get; set; }
+        public string sysad_username { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Password { get; set; }
+        public string sysad_password { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string sysad_name { get; set; }
 
-        public DateTime? Age { get; set; }
+        public DateTime? sysad_age { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Email { get; set; }
+        public string sysad_email { get; set; }
     }
 }

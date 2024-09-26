@@ -20,7 +20,7 @@ namespace Gymany_API.Controllers
          public IActionResult GetPostByPTID(int ptid)
          {
             // Tìm tất cả các bài viết với ptid là khóa chính
-            var posts = this._db.Posts.Where(p => p.PTID == ptid).OrderByDescending(n => n.PostID).ToList();
+            var posts = this._db.Posts.Where(p => p.pt_id == ptid).OrderByDescending(n => n.post_id).ToList();
 
             // Kiểm tra xem có bài viết nào không
             if (posts == null || posts.Count == 0)
@@ -34,7 +34,7 @@ namespace Gymany_API.Controllers
         [HttpGet]
         public IActionResult GetPost()
         {
-            IEnumerable<Post> list = this._db.Posts.OrderByDescending(n => n.PostID).ToList();
+            IEnumerable<Post> list = this._db.Posts.OrderByDescending(n => n.post_id).ToList();
             return Ok(list);
         }
         [HttpGet("id", Name = "GetPostByID")]
@@ -56,7 +56,7 @@ namespace Gymany_API.Controllers
             }
             this._db.Posts.Add(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPostByID", new{id = obj.PostID, obj});
+            return CreatedAtRoute("GetPostByID", new{id = obj.post_id, obj});
          }
 
         [HttpPut("Id")]
@@ -66,10 +66,10 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Post cus = this._db.Posts.AsNoTracking().FirstOrDefault(c => c.PostID == id);//loi khi bi entities theo doi
+            Post cus = this._db.Posts.AsNoTracking().FirstOrDefault(c => c.post_id == id);//loi khi bi entities theo doi
             this._db.Posts.Update(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPostByID", new{id = obj.PostID, obj});
+            return CreatedAtRoute("GetPostByID", new{id = obj.post_id, obj});
          }
          [HttpDelete("Id")]
          public IActionResult Delete(int id)
@@ -81,13 +81,13 @@ namespace Gymany_API.Controllers
             }
             this._db.Posts.Remove(obj);
             this._db.SaveChanges();
-            return CreatedAtRoute("GetPostByID", new{id = obj.PostID, obj});
+            return CreatedAtRoute("GetPostByID", new{id = obj.post_id, obj});
          }
          [HttpGet("PostID", Name = "GetBlogDetailByPostID")]
          public IActionResult GetBlogDetailByPostID(int PostID)
          {
             // Tìm tất cả các bài viết với ptid là khóa chính
-            var posts = this._db.Posts.Where(p => p.PostID == PostID).ToList();
+            var posts = this._db.Posts.Where(p => p.post_id == PostID).ToList();
 
             // Kiểm tra xem có bài viết nào không
             if (posts == null || posts.Count == 0)
