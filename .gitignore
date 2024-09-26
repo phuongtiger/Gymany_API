@@ -1,38 +1,35 @@
-# Bỏ qua thư mục bin và các file trong đó
-bin/
-bin/Debug/
-bin/Debug/net5.0/
+# From .NET Core 3.0 you can use the command: `dotnet new gitignore` to generate a customizable .gitignore file
 
-# Bỏ qua các file cụ thể trong thư mục bin/Debug/net5.0
-bin/Debug/net5.0/Gymany_API.dll
-bin/Debug/net5.0/Gymany_API.exe
-bin/Debug/net5.0/Gymany_API.pdb
-bin/Debug/net5.0/Gymany_API.runtimeconfig.dev.json
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
 
-# Bỏ qua thư mục obj và các file trong đó
-obj/
-obj/Debug/
-obj/Debug/net5.0/
-obj/Debug/net5.0/ref/
-obj/Debug/net5.0/ref/Gymany_API.dll
-obj/Debug/net5.0/refint/
-obj/Debug/net5.0/refint/Gymany_API.dll
-obj/Debug/net5.0/apphost.exe
-obj/Debug/net5.0/Gymany_API.AssemblyInfo.cs
-obj/Debug/net5.0/Gymany_API.AssemblyInfoInputs.cache
-obj/Debug/net5.0/Gymany_API.assets.cache
-obj/Debug/net5.0/Gymany_API.csproj.AssemblyReference.cache
-obj/Debug/net5.0/Gymany_API.csproj.CoreCompileInputs.cache
-obj/Debug/net5.0/Gymany_API.csproj.FileListAbsolute.txt
-obj/Debug/net5.0/Gymany_API.dll
-obj/Debug/net5.0/Gymany_API.GeneratedMSBuildEditorConfig.editorconfig
-obj/Debug/net5.0/Gymany_API.genruntimeconfig.cache
-obj/Debug/net5.0/Gymany_API.pdb
-obj/Debug/net5.0/Gymany_API.RazorTargetAssemblyInfo.cache
-obj/Debug/net5.0/Gymany_API.sourcelink.json
+# Visual Studio Code
+.vscode
 
-# Bỏ qua các file NuGet liên quan
-obj/Gymany_API.csproj.nuget.dgspec.json
-obj/Gymany_API.csproj.nuget.g.props
-obj/project.assets.json
-obj/project.nuget.cache
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
+*.editorconfig
