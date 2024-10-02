@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Gymany_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gymany_API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CartController : ControllerBase
+   [Authorize]
+   [ApiController]
+   [Route("api/[controller]")]
+   public class CartController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
         public CartController(ApplicationDbContext db){
