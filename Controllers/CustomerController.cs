@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 using Gymany_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
-using System.Net;
-
-
-
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gymany_API.Controllers
 {
@@ -20,10 +20,15 @@ namespace Gymany_API.Controllers
    public class CustomerController : ControllerBase
    {
       private readonly ApplicationDbContext _db;
-      public CustomerController(ApplicationDbContext db)
+      private readonly IConfiguration _configuration;
+
+      public CustomerController(ApplicationDbContext db, IConfiguration configuration)
       {
          this._db = db;
+         this._configuration = configuration;
       }
+
+      [Authorize]
       [HttpGet]
       public IActionResult GetCustomer()
       {
@@ -40,6 +45,8 @@ namespace Gymany_API.Controllers
          }
          return Ok(obj);
       }
+
+      [Authorize]
       [HttpPost]
       public IActionResult Create(Customer obj)
       {
@@ -52,6 +59,7 @@ namespace Gymany_API.Controllers
          return CreatedAtRoute("GetCustomerByID", new { id = obj.cus_id, obj });
       }
 
+      [Authorize]
       [HttpPut("Id")]
       public IActionResult Edit(int id, Customer obj)
       {
@@ -65,6 +73,7 @@ namespace Gymany_API.Controllers
          return CreatedAtRoute("GetCustomerByID", new { id = obj.cus_id, obj });
       }
 
+      [Authorize]
       [HttpDelete("Id")]
       public IActionResult Delete(int id)
       {
@@ -78,6 +87,7 @@ namespace Gymany_API.Controllers
          return CreatedAtRoute("GetCustomerByID", new { id = obj.cus_id, obj });
       }
 
+      [Authorize]
       [HttpGet("email", Name = "GetCustomerByEmail")]
       public IActionResult GetCustomerByEmail(string email)
       {
@@ -89,6 +99,7 @@ namespace Gymany_API.Controllers
          return Ok(obj);
       }
 
+      [Authorize]
       [HttpPost("forgotpassword")]
       public IActionResult ForgotPassword(string email)
       {
@@ -151,8 +162,8 @@ namespace Gymany_API.Controllers
          SmtpClient client = new SmtpClient();
          client.Port = 587;
          client.Host = "smtp.gmail.com";
-         client.EnableSsl = true; // hoặc client.UseSsl = true;
-         client.Credentials = new System.Net.NetworkCredential("Ducsieuda@gmail.com", "tjgj tslh nbyk xmjk"); // Thay thế YourPassword bằng mật khẩu của bạn
+         client.EnableSsl = true;
+         client.Credentials = new System.Net.NetworkCredential("Ducsieuda@gmail.com", "tjgj tslh nbyk xmjk");
          mail.Subject = "New Password";
          mail.Body = "Your new password is: " + newPassword;
          client.Send(mail);
@@ -167,8 +178,11 @@ namespace Gymany_API.Controllers
          {
             return NotFound();
          }
-         return Ok(obj);
+         var token = GenerateJwtToken(username);
+         return Ok(new { Token = token });
       }
+
+      [Authorize]
       [HttpGet("username", Name = "CheckUsername")]
       public IActionResult CheckUsername(string username)
       {
@@ -179,5 +193,23 @@ namespace Gymany_API.Controllers
          }
          return Ok(obj);
       }
+      private string GenerateJwtToken(string username)
+      {
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+
+         var tokenDescriptor = new SecurityTokenDescriptor
+         {
+            Subject = new ClaimsIdentity(new[] { new Claim("username", username) }),
+            Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpiryMinutes"])),
+            Issuer = _configuration["Jwt:Issuer"],
+            Audience = _configuration["Jwt:Audience"],
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+         };
+
+         var token = tokenHandler.CreateToken(tokenDescriptor);
+         return tokenHandler.WriteToken(token);
+      }
+
    }
 }
