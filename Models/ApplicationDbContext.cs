@@ -69,7 +69,7 @@ namespace Gymany_API.Models
         var adminFaker = new Faker<Admin>()
             .RuleFor(a => a.admin_id, f => f.IndexFaker + 1)
             .RuleFor(a => a.admin_username, f => "gymanyadmin") // Set username to "admin"
-            .RuleFor(a => a.admin_password, f => "123")   // Set password to "123"
+            .RuleFor(a => a.admin_password, f => "gymanyadmin@123")   // Set password to "123"
             .RuleFor(a => a.admin_name, f => f.Name.FullName()) // You can still use a random full name or customize it
             .RuleFor(a => a.admin_age, f => f.Date.Past(30, DateTime.Now.AddYears(-18)))
             .RuleFor(a => a.admin_salary, f => f.Finance.Amount(1000, 5000))
@@ -158,7 +158,7 @@ namespace Gymany_API.Models
         var systemAdminFaker = new Faker<SystemAdmin>()
             .RuleFor(sa => sa.sysad_id, f => f.IndexFaker + 1)
             .RuleFor(sa => sa.sysad_username, f => "gymanysysadmin") // Fixed username as "admin"
-            .RuleFor(sa => sa.sysad_password, f => "123") // Fixed password as "123"
+            .RuleFor(sa => sa.sysad_password, f => "gymanysysadmin@123") // Fixed password as "123"
             .RuleFor(sa => sa.sysad_name, f => f.Name.FullName()) // Random full name
             .RuleFor(sa => sa.sysad_age, f => f.Date.Past(30, DateTime.Now.AddYears(-18))) // Birthdate between 18 and 48 years ago
             .RuleFor(sa => sa.sysad_email, f => f.Internet.Email()); // Random email address
@@ -174,7 +174,7 @@ namespace Gymany_API.Models
         var customerFaker = new Faker<Customer>()
             .RuleFor(c => c.cus_id, f => f.IndexFaker + 1)
             .RuleFor(c => c.cus_username, f => "gymanycus") // Random username
-            .RuleFor(c => c.cus_password, f => "123") // Random password
+            .RuleFor(c => c.cus_password, f => "gymanycus@123") // Random password
             .RuleFor(c => c.cus_name, f => f.Name.FullName()) // Random full name
             .RuleFor(c => c.cus_address, f => f.Address.StreetAddress()) // Random full address
             .RuleFor(c => c.cus_age, f => f.Date.Past(30, DateTime.Now.AddYears(-18))) // Random age between 18 and 48 years ago
@@ -205,7 +205,7 @@ namespace Gymany_API.Models
         var personalTrainerFaker = new Faker<PersonalTrainer>()
             .RuleFor(pt => pt.pt_id, f => f.IndexFaker + 1)
             .RuleFor(pt => pt.pt_username, f => "gymanypt")
-            .RuleFor(pt => pt.pt_password, f => "123")
+            .RuleFor(pt => pt.pt_password, f => "gymanypt@123")
             .RuleFor(pt => pt.pt_name, f => f.Name.FullName())
             .RuleFor(pt => pt.pt_age, f => f.Date.Past(30, DateTime.Now.AddYears(-25)))
             .RuleFor(pt => pt.pt_address, f => {
