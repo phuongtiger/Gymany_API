@@ -46,7 +46,6 @@ namespace Gymany_API.Controllers
          return Ok(obj);
       }
 
-      [Authorize]
       [HttpPost]
       public IActionResult Create(Customer obj)
       {
@@ -99,7 +98,6 @@ namespace Gymany_API.Controllers
          return Ok(obj);
       }
 
-      [Authorize]
       [HttpPost("forgotpassword")]
       public IActionResult ForgotPassword(string email)
       {
@@ -179,10 +177,9 @@ namespace Gymany_API.Controllers
             return NotFound();
          }
          var token = GenerateJwtToken(username);
-         return Ok(new { Token = token });
+         return Ok(new { Token = token, CustomerID = obj.cus_id });
       }
 
-      [Authorize]
       [HttpGet("username", Name = "CheckUsername")]
       public IActionResult CheckUsername(string username)
       {
@@ -191,7 +188,7 @@ namespace Gymany_API.Controllers
          {
             return NotFound();
          }
-         return Ok(obj);
+         return Ok(new {status = 200});
       }
       private string GenerateJwtToken(string username)
       {
