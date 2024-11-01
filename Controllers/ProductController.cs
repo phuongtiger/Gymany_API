@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Gymany_API.Models;
@@ -15,7 +13,8 @@ namespace Gymany_API.Controllers
         private readonly ApplicationDbContext _db;
         public ProductController(ApplicationDbContext db){
             this._db = db;
-        } 
+        }
+
         [HttpGet]
         public IActionResult GetProducts()
         {
@@ -51,7 +50,7 @@ namespace Gymany_API.Controllers
             {
                return BadRequest("..."); 
             }
-            Product cus = this._db.Products.AsNoTracking().FirstOrDefault(c => c.prod_id == id);//loi khi bi entities theo doi
+            Product cus = this._db.Products.AsNoTracking().FirstOrDefault(c => c.prod_id == id);
             this._db.Products.Update(obj);
             this._db.SaveChanges();
             return CreatedAtRoute("GetProductByID", new{id = obj.prod_id, obj});
